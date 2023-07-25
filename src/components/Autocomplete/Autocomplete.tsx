@@ -11,7 +11,7 @@ export interface Option {
 interface AutoCompleteProps { 
   options: Option[];
   optionFetcher: (query: string) => void;
-  selectedOptionSetter?: (option: Option) => void;
+  selectedOptionSetter?: (option: Option | null) => void;
 }
 
 const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, selectedOptionSetter }) => {
@@ -23,10 +23,11 @@ const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, sel
     setQuery(e.target.value);
     setSearchQuery(e.target.value);
     optionFetcher(e.target.value);
+    selectedOptionSetter && selectedOptionSetter(null);
   }
 
   const selectOption = (option: string) => {
-    selectedOptionSetter && selectedOptionSetter(options.find((opt) => opt.label === option) as Option);
+    selectedOptionSetter && selectedOptionSetter(options.find((opt) => opt.value === option) as Option);
     setQuery(option);
   }
 
