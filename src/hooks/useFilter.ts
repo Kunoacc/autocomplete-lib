@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { debounce } from "../helpers/debounce";
 import { search } from "../helpers/search";
 
-export const useFilter = (query: string, data: string[]) => {
+export const useFilter = (query: string, data: string[], debounceTimer: number = 1500) => {
   const [searchQuery, setSearchQuery] = useState<string>(query);
   const [filteredData, setFilteredData] = useState<string[]>([]);
 
@@ -13,7 +13,7 @@ export const useFilter = (query: string, data: string[]) => {
         setFilteredData(filteredData)
       }
     }
-  , 1500), [data])
+  , debounceTimer), [data])
 
   useEffect(() => {
     filterOptions(searchQuery)

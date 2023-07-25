@@ -8,6 +8,9 @@ export interface Option {
   value: string;
 }
 
+/**
+ * TODO: create a renderer for the autocomplete results and use your implementation as the default
+ */
 interface AutoCompleteProps { 
   options: Option[];
   optionFetcher: (query: string) => void;
