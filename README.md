@@ -39,7 +39,7 @@ pnpm install
 4. **Start the development server**
 
 ```bash
-pnpm start
+pnpm dev
 ```
 
 By default, the development server will run on `localhost:5173`.

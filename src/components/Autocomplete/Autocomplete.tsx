@@ -19,7 +19,7 @@ interface AutoCompleteProps {
   selectedOptionSetter?: (option: Option | null) => void;
 }
 
-const Autocomplete: React.FC<AutoCompleteProps> = ({ options, selectedOptionSetter }) => {
+const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, selectedOptionSetter }) => {
   const [query, setQuery] = useState<string>("");
 
   const { filteredData, setSearchQuery } = useFilter(query, options.map((option) => option.value));
@@ -27,6 +27,7 @@ const Autocomplete: React.FC<AutoCompleteProps> = ({ options, selectedOptionSett
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     setSearchQuery(e.target.value);
+    optionFetcher && optionFetcher(e.target.value);
     selectedOptionSetter && selectedOptionSetter(null);
   }
 
