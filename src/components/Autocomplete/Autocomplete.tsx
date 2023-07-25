@@ -38,6 +38,7 @@ const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, sel
         placeholder="Search"
         value={query}
         onChange={onInputChange}
+        className={styles.autocomplete__input}
       />
       {filteredData.length > 0 && (
         <ul className={styles.autocomplete__results}>

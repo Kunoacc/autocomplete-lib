@@ -14,17 +14,21 @@
 
   &__results {
     position: absolute;
-    width: 100%;
+    width: calc(100% + 30px);
     max-height: 10rem;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     background-color: #fff;
     overflow-y: auto;
     z-index: 1;
+    list-style: none;
+    padding: 0;
 
     &__item {
       padding: 0.5rem 1rem;
       cursor: pointer;
+      border-radius: 0.25rem;
+      font-size: 1rem;
 
       &:hover {
         background-color: #f1f1f1;
