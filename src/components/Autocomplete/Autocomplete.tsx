@@ -10,6 +10,8 @@ export interface Option {
 
 /**
  * TODO: create a renderer for the autocomplete results and use your implementation as the default
+ * The component should allow a render prop to be passed in that will be used to render the results
+ * but due to time constraints, I'm just going to leave it as is
  */
 interface AutoCompleteProps { 
   options: Option[];
@@ -17,7 +19,7 @@ interface AutoCompleteProps {
   selectedOptionSetter?: (option: Option | null) => void;
 }
 
-const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, selectedOptionSetter }) => {
+const Autocomplete: React.FC<AutoCompleteProps> = ({ options, selectedOptionSetter }) => {
   const [query, setQuery] = useState<string>("");
 
   const { filteredData, setSearchQuery } = useFilter(query, options.map((option) => option.value));
@@ -25,7 +27,6 @@ const Autocomplete: React.FC<AutoCompleteProps> = ({ optionFetcher, options, sel
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     setSearchQuery(e.target.value);
-    optionFetcher(e.target.value);
     selectedOptionSetter && selectedOptionSetter(null);
   }
 

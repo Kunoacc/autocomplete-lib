@@ -3,6 +3,7 @@ import { API_BASE_URL } from '../../constants';
 import { useApiFetch } from '../../hooks/useFetch';
 import { CatsResponse } from '../../interfaces/ApiResponse.interface';
 import Autocomplete from '../Autocomplete/Autocomplete';
+import { debounce } from '../../helpers/debounce';
 
 function App() {
   const [refreshKey, setRefreshKey] = useState<string>("");
@@ -29,11 +30,13 @@ function App() {
 
   return (
     <>
-      <p>Selected Cat: {selectedCat}</p>
+      {!selectedCat && <div>Please search for & select a cat</div>}
+      {selectedCat && <div>You selected: {selectedCat}</div>}
+
       <Autocomplete
         optionFetcher={(key: string) => setRefreshKey(key)}
         options={options}
-        selectedOptionSetter={(option) => setSelectedCat(option?.value as string)}
+        selectedOptionSetter={(option) => debounce(() => setSelectedCat(option?.value as string), 1500)}
       />
     </>
   )
